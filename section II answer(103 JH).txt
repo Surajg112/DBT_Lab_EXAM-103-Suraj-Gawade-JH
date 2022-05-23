@@ -1,0 +1,39 @@
+Ans 1)---------------------------------------->
+create table tempp(EXIST varchar(10));
+select * from tempp;
+
+delimiter //
+create procedure  PROC1()
+begin
+declare x varchar(10);
+declare y varchar(10);
+declare finished result int default true;
+declare c1 cursor fro EXIST from tempp;
+declare comtinue handler fornot found set finished=false;
+open c1;
+cursor_c1_loop : loop
+fetch c1 into x,y;
+if finished = true then 
+leave cursor_c1_loop;
+endif;
+set result= x exist y
+insert result into tempp;
+close c1;
+end; //
+delimiter;
+
+
+Ans 2)---------------------------------------->
+delimiter //
+create function FUNC1(a int,b int, c int)
+return boolean
+deterministic
+begin
+declare a int;
+declare b int;
+declare c int;
+if (a+b<=c and b+c<=a and c+a<=b) then FALSE;
+else TRUE
+
+end; //
+delimiter;
